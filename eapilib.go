@@ -522,7 +522,8 @@ func (conn *HTTPSEapiConnection) send(data []byte) (*JSONRPCResponse, error) {
 	timeOut := time.Duration(time.Duration(conn.timeOut) * time.Second)
 	url := conn.getURL()
 	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
+		DisableKeepAlives: true,
 	}
 	client := &http.Client{
 		Timeout:   timeOut,
